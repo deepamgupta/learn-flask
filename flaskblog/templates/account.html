@@ -1,4 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{ current_user.username }}</h1>
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ current_user.username }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            <!-- enctype (encoding) is given so that our form takes the file data flawlessly
+                    this is very important to mentions while working with files, else errors may occur -->
+            {{ form.hidden_tag() }} <!-- This hidden_tag method adds something called as a CSRF-Token(Cross Site Request Forgery);
+             this is a part of that protection provided by the SECRET_KEY we sat in the run.py file -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        {% for error in form.username.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        {% for error in form.email.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <!-- Since, this is a file_field, its errors are to be handled a bit differently -->
+                    {{ form.picture.label() }}<br>
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <br><span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+            </fieldset>
+            <div class="form-group my-3">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+
 {% endblock content %}
