@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }} <!-- This hidden_tag method adds something called as a CSRF-Token(Cross Site Request Forgery);
+             this is a part of that protection provided by the SECRET_KEY we sat in the run.py file -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">New Post</legend>
+                <div class="form-group">
+                    {{ form.title.label(class='form-control-label') }}
+                    {% if form.title.errors %}
+                        {{ form.title(class='form-control form-control-lg is-invalid') }}
+                        {% for error in form.title.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.title(class='form-control form-control-lg') }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.content.label(class='form-control-label') }}
+                    {% if form.content.errors %}
+                        {{ form.content(class='form-control form-control-lg is-invalid') }}
+                        {% for error in form.content.errors %}
+                            <div class="invalid-feedback">
+                                <span>{{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.content(class='form-control form-control-lg') }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group my-3">
+                {{ form.submit(class='btn btn-outline-info') }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
