@@ -5,7 +5,7 @@
             {{ form.hidden_tag() }} <!-- This hidden_tag method adds something called as a CSRF-Token(Cross Site Request Forgery);
              this is a part of that protection provided by the SECRET_KEY we sat in the run.py file -->
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">New Post</legend>
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
                 <div class="form-group">
                     {{ form.title.label(class='form-control-label') }}
                     {% if form.title.errors %}
