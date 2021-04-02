@@ -1,11 +1,11 @@
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-# FileField is about which type of files it is
-# FileAllowed is which all files are allowed to be uploaded
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, FileField
+from wtforms.validators import DataRequired, EqualTo, ValidationError, Length, Email
+
 from flaskblog.models import User
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -59,11 +59,6 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError(
                     'That email is taken, please choose a different one.')
-
-class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    submit = SubmitField('Post')
 
 
 class RequestResetForm(FlaskForm):

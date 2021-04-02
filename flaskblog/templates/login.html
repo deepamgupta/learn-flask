@@ -40,14 +40,14 @@
             <div class="form-group my-3">
                 {{ form.submit(class='btn btn-outline-info') }}
                 <small class="text-muted ml-2">
-                    <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
+                    <a href="{{ url_for('users.reset_request') }}">Forgot Password?</a>
                 </small>
             </div>
         </form>
     </div>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Need an account? <a href="{{ url_for('register') }}" class="ml-2">Sign Up</a>
+            Need an account? <a href="{{ url_for('users.register') }}" class="ml-2">Sign Up</a>
             <!-- url_for(argument), here argument is not the route,
             instead, it is the name of the function to which it is to be routed.              -->
         </small>
