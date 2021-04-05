@@ -27,7 +27,7 @@ A full-fledged blogging application in [flask](https://flask.palletsprojects.com
 
 > Note: The steps 4 and 5 may differ on Windows.
 
-_If you get any issue, feel free to ask._ 
+_If you get any issue, feel free to ask._ 😉 
 
 ### Credits 
 
