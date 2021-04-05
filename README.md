@@ -31,8 +31,8 @@ A full-fledged blogging application in [flask](https://flask.palletsprojects.com
 
 ### Credits 
 
-- I made this as part of learning flask
+- I built this to start learning flask
 - **Dhanyawaad 🙏** to [Corey Schafer](https://www.coreyms.com) for this insightful learning series
-- [Flask Tutorial: Corey Schafer](https://youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH)
+- [Flask Tutorial: Corey Schafer on YouTube](https://youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH)
 - He has explained everything admirably well. This is a long series, but it is worth it. 
 - The best part, it is free...😉
