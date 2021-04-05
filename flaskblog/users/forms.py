@@ -28,6 +28,7 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('That email is taken, please choose a different one.')
 
+
 class LoginForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
@@ -36,13 +37,14 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Log In')
 
+
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
 
-    picture = FileField('Update your profile picture', validators=[FileAllowed(['jpg','png','jpeg'])])
+    picture = FileField('Update your profile picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
 
     submit = SubmitField('Update')
 
@@ -70,6 +72,7 @@ class RequestResetForm(FlaskForm):
 
         if not user:
             raise ValidationError('There is no account with that mail. You must register first.')
+
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])

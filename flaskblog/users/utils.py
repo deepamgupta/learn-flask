@@ -14,7 +14,7 @@ def save_picture(form_picture):
     _, f_ext = os.path.splitext(form_picture.filename)
     # html form will add the 'filename' attribute to the form_picture value automatically.
     # os.path.split will give two values viz. file_name and file_extension, but here we just want to use the extension, so in python if we donot want to use a variable, we name it as underscore('_') like we did here with filename
-    picture_fn = random_hex + f_ext # picture_filename
+    picture_fn = random_hex + f_ext  # picture_filename
     picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
 
     # resizing the images to 125 px, else large images will take much space on the file system
@@ -43,4 +43,3 @@ If you did not make this request then, simply ignore this message and no changes
 def delete_picture(image_file):
     image_path = os.path.join(current_app.root_path, 'static/profile_pics', image_file)
     os.remove(image_path)
-

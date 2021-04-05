@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
 
-    @staticmethod # when the method has nothing to do with the instance of that class in which it is defined(i.e. it doesn't contains usage of 'self'), then, that method is declared as staticmethod
+    @staticmethod  # when the method has nothing to do with the instance of that class in which it is defined(i.e. it doesn't contains usage of 'self'), then, that method is declared as staticmethod
     def verify_reset_token(token):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:

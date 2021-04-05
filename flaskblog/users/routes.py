@@ -11,6 +11,7 @@ from flaskblog.users.utils import save_picture, delete_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
+
 @users.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -25,8 +26,9 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f"Your account has been created, you are now able to log in!", "success")
-        return redirect(url_for('users.login')) # url_for(arg), here arg is function name, not route name.
+        return redirect(url_for('users.login'))  # url_for(arg), here arg is function name, not route name.
     return render_template('register.html', title="Register", form=form)
+
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
@@ -43,6 +45,7 @@ def login():
             flash("Login unsuccessful. Please check email and password.", "danger")
     return render_template('login.html', title="Login", form=form)
 
+
 @users.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
@@ -50,7 +53,7 @@ def logout():
 
 
 @users.route('/account', methods=['GET', 'POST'])
-@login_required # look for login_manager.login_view in __init__.py . Try to access this page without logging in and it will redirect to the login page and add a "next" parameter in the url
+@login_required  # look for login_manager.login_view in __init__.py . Try to access this page without logging in and it will redirect to the login page and add a "next" parameter in the url
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
@@ -71,19 +74,19 @@ def account():
     image = url_for('static', filename='profile_pics/' + current_user.image_file)
 
     # if file not present
-    if not os.path.isfile('flaskblog'+ image):
+    if not os.path.isfile('flaskblog' + image):
         image = url_for('static', filename='profile_pics/' + 'default.jpg')
     return render_template('account.html', title="Account", image_file=image, form=form)
+
 
 @users.route('/user/<string:username>')
 def user_posts(username):
     page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
-    posts = Post.query.filter_by(author=user)\
-        .order_by(Post.date_posted.desc())\
+    posts = Post.query.filter_by(author=user) \
+        .order_by(Post.date_posted.desc()) \
         .paginate(per_page=5, page=page)
     return render_template("user_posts.html", posts=posts, user=user)
-
 
 
 @users.route('/reset_password', methods=['GET', 'POST'])
@@ -98,11 +101,12 @@ def reset_request():
         return redirect(url_for('users.login'))
     return render_template("reset_request.html", title="Reset Password", form=form)
 
+
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    user = User.verify_reset_token(token) # if we do not get a user, then either token is invalid or expired
+    user = User.verify_reset_token(token)  # if we do not get a user, then either token is invalid or expired
     if not user:
         flash('That is an invalid or expired token', 'warning')
         return redirect(url_for('users.reset_request'))

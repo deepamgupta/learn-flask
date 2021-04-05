@@ -8,7 +8,6 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flaskblog.config import Config
 
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -17,11 +16,12 @@ login_manager.login_message_category = 'info'  # for making the message look goo
 
 mail = Mail()
 
+
 # extension to our app: db, bcrypt, login_manager, mail
 
 
-
-def create_app(config_class=Config):  # this will allow us to create multiple instances of our app with different configurations
+def create_app(
+        config_class=Config):  # this will allow us to create multiple instances of our app with different configurations
 
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -34,13 +34,11 @@ def create_app(config_class=Config):  # this will allow us to create multiple in
     from flaskblog.users.routes import users
     from flaskblog.posts.routes import posts
     from flaskblog.main.routes import main
+    from flaskblog.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
-
-
-
-
